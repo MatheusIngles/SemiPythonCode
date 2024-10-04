@@ -11,8 +11,15 @@ SELECT gerar_uuid7();
 INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
 ('01924ccd-a497-78cd-a17e-b687b6b62208', '01924ce0-de15-71f0-a465-dfceb3353c8c', 'O',
 '\question
-São motivos importantes e gerais para o estudo das linguagens de programação,
-exceto:');
+A arquitetura ilustrada na figura abaixo é um exemplo típico de qual sistema?
+(CU = unidade de controle; IS = \ingles(stream} de instruções; PU = unidade de
+processamento; DS = \ingles{stream} de dados; LM = memória local)
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{arq-cluster.png}
+\end{center}
+\end{figure}
+\vspace{-1cm}');
 
 -- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
 INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES

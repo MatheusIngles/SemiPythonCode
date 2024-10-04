@@ -28,11 +28,8 @@ for cod_questao, enunciado in matches_questoes:
     
     if match_includegraphics:
         imagem = match_includegraphics.group(1)  # Nome da imagem encontrado
-    else:
-        imagem = ""  # Nenhuma imagem encontrada, string vazia
-
-    # Adicionar o resultado à lista
-    resultados.append((cod_questao, imagem))
+        # Adicionar o resultado à lista
+        resultados.append((cod_questao, imagem))
 
 # Exibir o resultado
 for resultado in resultados:
