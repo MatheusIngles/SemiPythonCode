@@ -9,7 +9,10 @@
 import sys, re
 from sqlalchemy.sql import text
 
-with open("./linguagens_programacao.sql",'r') as file: 
+PATH = "./banco_de_dados_1.sql"
+PATH_IMAGENS = "./Imagens/"
+
+with open(PATH,'r') as file: 
     sql = file.read()
 
 # Expressão regular para capturar o código da questão e o includegraphics
