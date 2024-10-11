@@ -12,28 +12,34 @@ from sqlalchemy.sql import text
 PATH = "./banco_de_dados_1.sql"
 PATH_IMAGENS = "./Imagens/"
 
+def capturar_imagens(enunciado, identificador):
+    pattern_includegraphics = r"\\includegraphics\[[^\]]+\]\{([^}]+)\}"
+    imagens = re.findall(pattern_includegraphics, enunciado)
+    return [(identificador, imagem) for imagem in imagens]
+
 with open(PATH,'r') as file: 
     sql = file.read()
-
-# Expressão regular para capturar o código da questão e o includegraphics
+# Expressões regulares para capturar questões e alternativas
 pattern_questao = r"INSERT INTO questoes\s*\(.*?VALUES\s*\('([^']+)'.*?'(.*?)'\);"
-# Expressão regular para capturar includegraphics dentro do enunciado
-pattern_includegraphics = r"\\includegraphics\[[^\]]+\]\{([^}]+)\}"
+pattern_alternativas = r"INSERT INTO alternativas\s*\(.*?\) VALUES\s*(.*?);"
+pattern_valores_alternativas = r"\('([^']+)',\s*'([^']+)',\s*'(.*?)',"
+
 # Lista para armazenar os resultados
 resultados = []
-# Encontrar todas as correspondências de questões
-matches_questoes = re.findall(pattern_questao, sql,re.DOTALL)
 
-# Iterar sobre cada correspondência encontrada
+# Encontrar todas as correspondências de questões e capturar imagens
+matches_questoes = re.findall(pattern_questao, sql, re.DOTALL)
 for cod_questao, enunciado in matches_questoes:
-    # Verificar se o enunciado contém includegraphics
-    match_includegraphics = re.search(pattern_includegraphics, enunciado)
-    
-    if match_includegraphics:
-        imagem = match_includegraphics.group(1)  # Nome da imagem encontrado
-        # Adicionar o resultado à lista
-        resultados.append((cod_questao, imagem))
+    resultados.extend(capturar_imagens(enunciado, cod_questao))
+
+# Encontrar todos os blocos de alternativas e capturar imagens
+matches_alternativas_blocos = re.findall(pattern_alternativas, sql, re.DOTALL)
+for bloco in matches_alternativas_blocos:
+    matches_alternativas = re.findall(pattern_valores_alternativas, bloco)
+    for cod_alternativa, cod_questao, enunciado in matches_alternativas:
+        identificador = f"Alternativa {cod_alternativa} da Questão {cod_questao}"
+        resultados.extend(capturar_imagens(enunciado, identificador))
 
 # Exibir o resultado
 for resultado in resultados:
-    print(f"Cod_Questao: {resultado[0]}, Imagem: {resultado[1]}")
+    print(f"Cod_Identificador: {resultado[0]}, Imagem: {resultado[1]}")

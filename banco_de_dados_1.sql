@@ -477,4 +477,225 @@ INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
 INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
 ('019278ac-fc99-7842-b4ec-c1dee5abc28f', '019278af-fd49-78c9-bd75-501c450d3643');
 
+--------------------------------------------------------------------------------
+-- QUESTÃO OBJETIVA:14
+--------------------------------------------------------------------------------
+
+-- Bancos de dados 1: 019230bc-08a9-7f9b-b413-411ed5b7e194
+-- Classificacao: 0192785b-927b-7faa-ac7a-a5f00578c203
+
+-- 1) INSERIR A QUESTÃO (na classificação correta):
+INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
+('01927d35-51f7-7231-adaa-e9a9921edb16', '0192785b-927b-7faa-ac7a-a5f00578c203', 'O',
+'\question
+(Adaptado do ENADE 2005) Analise o relacionamento existente entre as tabelas
+``clubes'' e ``jogadores'', nas alternativas abaixo, e marque a alternativa que
+indica que todo jogador deve pertencer a um único clube, e todo clube poder ter
+ou não jogadores.');
+
+-- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
+INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
+('01927d36-40e3-7137-8b33-df53a8287c89', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj1.png} \vspace{0.5cm}', FALSE),
+('01927d36-57ce-787f-a81b-fbad30328d0d', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj4.png} \vspace(0.5cm}', TRUE),
+('01927d36-6be2-7322-8355-98d45ac2d556', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj3.png} \vspace{0.5cm}', FALSE),
+('01927d36-8341-7913-855c-f787761163d6', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj5.png} \vspace{0.5cm}', FALSE),
+('01927d36-9b5d-7727-9ecf-8935a673006a', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj2.png} \vspace{0.5cm}', FALSE);
+
+
+-- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
+INSERT INTO questoes_disciplinas (cod_questao, cod_disciplina) VALUES
+('01927d35-51f7-7231-adaa-e9a9921edb16', '019230bc-08a9-7f9b-b413-411ed5b7e194');
+
+-- 4) INSERIR TAGS ÚTEIS QUE PODEM SERVIR PARA A QUESTÃO (pesquisar se já existe):
+INSERT INTO tags (cod_tag, tag, tag_padronizada) VALUES
+('01927d3a-151b-77e1-ae95-e9fcf5e311f4', 'Cardinalidade de Relacionamentos', padronizar_palavra('Cardinalidade de Relacionamentos'));
+
+-- 5) RELACIONAR A QUESTÃO COM AS TAGS (recém-criadas ou já existentes):
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d35-51f7-7231-adaa-e9a9921edb16', '01927d3a-151b-77e1-ae95-e9fcf5e311f4');
+
+--------------------------------------------------------------------------------
+-- QUESTÃO OBJETIVA:15
+--------------------------------------------------------------------------------
+
+-- Bancos de dados 1: 019230bc-08a9-7f9b-b413-411ed5b7e194
+-- Classificacao: 0192785b-927b-7faa-ac7a-a5f00578c203
+
+-- 1) INSERIR A QUESTÃO (na classificação correta):
+INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
+('01927d3a-e50c-7205-bf0a-cc93a118761c', '0192785b-927b-7faa-ac7a-a5f00578c203', 'O',
+'\question
+(Adaptado do ENADE 2005) Avalie o seguite diagrama relacional de um banco de dados:
+\begin{figure}[H]
+  \centering
+  \caption{Banco de dados de peças e fornecedores}
+  \label{fig:pecas}
+  %\fbox{
+    \includegraphics[scale=2.0]{pecas-fornecedores.png}
+  %}\\
+  %\footnotesize{Fonte: xxxx.}
+\end{figure}
+Assinale a opção que apresenta um comando SQL que permite obter uma lista que
+contenha o nome de cada fornecedor que tenha fornecido alguma peça, o código da
+peça fornecida, a descrição dessa peça e a quantidade fornecida da referida
+peça.');
+
+-- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
+INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
+('01927d3b-5610-7aec-ae30-b6e433e71f58', '01927d3a-e50c-7205-bf0a-cc93a118761c', '\begin{verbatim}SELECT * FROM pecas INNER JOIN fornecedores INNER JOIN fornecimentos;\end{verbatim} ', FALSE),
+('01927d3b-6cdb-7643-a4e6-98b1b8efd29b', '01927d3a-e50c-7205-bf0a-cc93a118761c', '\begin{verbatim}SELECT * FROM pecas INNER JOIN fornecimentos f ON (p.codigo = f.cod_peca) INNER JOIN fornecedores f2 ON (f.cod_forn = f2.cod_forn) ORDER BY f2.nome;\end{verbatim} ', FALSE),
+('01927d3b-8835-7fd6-856d-2898c7501989', '01927d3a-e50c-7205-bf0a-cc93a118761c', '\begin{verbatim}SELECT f2.nome, p.codigo, p.descricao, f.quantidade FROM pecas INNER JOIN fornecimentos f ON (p.codigo = f.cod_peca) INNER JOIN fornecedores f2 ON (f.cod_forn = f2.cod_forn);\end{verbatim} ', TRUE),
+('01927d3b-9b6b-7d51-9abc-11dbd727f026', '01927d3a-e50c-7205-bf0a-cc93a118761c', '\begin{verbatim}SELECT nome, codigo, descricao, quantidade FROM pecas INNER JOIN FORNECEDORES INNER JOIN FORNECIMENTOS;\end{verbatim} ', FALSE),
+('01927d3b-aeac-739e-a381-34dafe049319', '01927d3a-e50c-7205-bf0a-cc93a118761c', '\begin{verbatim}SELECT DISTINCT p.nome, p.codigo, p.descricao, f.quantidade FROM pecas p INNER JOIN fornecimentos f ON (p.codigo = f.cod_peca);\end{verbatim} ', FALSE);
+
+
+-- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
+INSERT INTO questoes_disciplinas (cod_questao, cod_disciplina) VALUES
+('01927d3a-e50c-7205-bf0a-cc93a118761c', '019230bc-08a9-7f9b-b413-411ed5b7e194');
+
+-- 4) INSERIR TAGS ÚTEIS QUE PODEM SERVIR PARA A QUESTÃO (pesquisar se já existe):
+INSERT INTO tags (cod_tag, tag, tag_padronizada) VALUES
+('01927d3b-c410-75e9-bcdf-f83039f89f71', 'SQL', padronizar_palavra('SQL'));
+
+INSERT INTO tags (cod_tag, tag, tag_padronizada) VALUES
+('01927d40-44c9-7690-852e-80609d049cd2', 'Banco de Dados Relacional', padronizar_palavra('Banco de Dados Relacional'));
+
+-- 5) RELACIONAR A QUESTÃO COM AS TAGS (recém-criadas ou já existentes):
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d3a-e50c-7205-bf0a-cc93a118761c', '01927d3b-c410-75e9-bcdf-f83039f89f71');
+
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d3a-e50c-7205-bf0a-cc93a118761c', '01927d40-44c9-7690-852e-80609d049cd2');
+
+--------------------------------------------------------------------------------
+-- QUESTÃO OBJETIVA:16
+--------------------------------------------------------------------------------
+
+-- Bancos de dados 1: 019230bc-08a9-7f9b-b413-411ed5b7e194
+-- Classificacao: 0192785b-927b-7faa-ac7a-a5f00578c203
+
+-- 1) INSERIR A QUESTÃO (na classificação correta):
+INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
+('01927d41-97e3-7872-949d-fd6e4283286b', '0192785b-927b-7faa-ac7a-a5f00578c203', 'O',
+'\question
+Analise o diagrama relacional do banco de dados exibido na figura abaixo:
+\begin{figure}[H]
+  \centering
+  \caption{Banco de dados de peças e fornecedores}
+  \label{fig:pecas}
+  %\fbox{
+    \includegraphics[scale=2.0]{pecas-fornecedores.png}
+  %}\\
+  %\footnotesize{Fonte: xxxx.}
+\end{figure}
+Podemos dizer que esse banco de dados ilustra:');
+
+-- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
+INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
+('01927d42-41ba-7572-8d7c-9d5b5a121649', '01927d41-97e3-7872-949d-fd6e4283286b', 'Um relacionamento com cardinalidade N:N entre as tabelas ``pecas'' e ``fornecedores'', realizado através de relacionamentos identificados através da tabela ``fornecimentos''. ', TRUE),
+('01927d42-6068-726d-9fcf-3d8ddf096ddf', '01927d41-97e3-7872-949d-fd6e4283286b', 'Um relacionamento com cardinalidade N:N entre as tabelas ``pecas'' e ``fornecimentos'', realizado através de relacionamentos não identificados com a tabela ``fornecedores''. ', FALSE),
+('01927d42-7435-754d-8837-325fa72a5dc9', '01927d41-97e3-7872-949d-fd6e4283286b', 'Um relacionamento com cardinalidade 1:N entre as tabelas ``pecas'' e ``fornecedores'', indicando que uma peça pode ter sido fornecida por diversos fornecedores. ', FALSE),
+('01927d42-87c6-7958-85f4-66f2d3c2d0cf', '01927d41-97e3-7872-949d-fd6e4283286b', 'Um relacionamento com identificação N:N entre as tabelas ``pecas'' e ``fornecedores'', realizado através do relacionamento com cardinalidade identificada através da tabela ``fornecimentos''. ', FALSE),
+('01927d42-a635-7fd4-b14c-277268590da2', '01927d41-97e3-7872-949d-fd6e4283286b', 'Um relacionamento com cardinalidade N:N entre as tabelas ``pecas'' e ``fornecedores'', realizado através de relacionamentos não identificados através da tabela ``fornecimentos''. ', FALSE);
+
+-- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
+INSERT INTO questoes_disciplinas (cod_questao, cod_disciplina) VALUES
+('01927d41-97e3-7872-949d-fd6e4283286b', '019230bc-08a9-7f9b-b413-411ed5b7e194');
+
+-- 4) INSERIR TAGS ÚTEIS QUE PODEM SERVIR PARA A QUESTÃO (pesquisar se já existe):
+INSERT INTO tags (cod_tag, tag, tag_padronizada) VALUES
+('01927d45-4892-74e6-805e-2466fe3dcb73', 'Modelagem de Dados', padronizar_palavra('Modelagem de Dados'));
+
+-- 5) RELACIONAR A QUESTÃO COM AS TAGS (recém-criadas ou já existentes):
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d41-97e3-7872-949d-fd6e4283286b', '01927d3a-151b-77e1-ae95-e9fcf5e311f4');
+
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d41-97e3-7872-949d-fd6e4283286b', '01927d45-4892-74e6-805e-2466fe3dcb73');
+
+--------------------------------------------------------------------------------
+-- QUESTÃO OBJETIVA:17
+--------------------------------------------------------------------------------
+
+-- Bancos de dados 1: 019230bc-08a9-7f9b-b413-411ed5b7e194
+-- Classificacao: 0192785b-927b-7faa-ac7a-a5f00578c203
+
+-- 1) INSERIR A QUESTÃO (na classificação correta):
+INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
+('01927d47-f190-7792-a211-bc3c2aa87c15', '0192785b-927b-7faa-ac7a-a5f00578c203', 'O',
+'\question
+Avalie o banco de dados de professores e alunos, mostrado a seguir. Esse banco
+de dados pretende armazenar todas as turmas, sendo que um professor pode dar
+aula para vários alunos ao mesmo tempo, e um mesmo aluno pode ter aula com
+diferentes professores ao mesmo tempo.
+\begin{figure}[H]
+  \centering
+  \caption{Professores, turmas e alunos}
+  \label{fig:professores}
+  %\fbox{
+    \includegraphics[scale=2.0]{professor-aluno.png}
+  %}\\
+  %\footnotesize{Fonte: xxxx.}
+\end{figure}
+Esse banco de dados resolveráo problema de armazenar os dados das turmas?');
+
+-- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
+INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
+('01927d4e-78de-7bd3-9d60-3be1e667219a', '01927d47-f190-7792-a211-bc3c2aa87c15', 'Não, pois as cardinalidades e os sentidos dos relacionamentos entre ''professores'' e ''turmas'', e entre ''turmas'' e ''alunos'' não cria um relacionamento N:N entre ''professores'' e ''alunos''.', TRUE),
+('01927d4e-9410-7d61-bc6b-3b87f41bb51b', '01927d47-f190-7792-a211-bc3c2aa87c15', 'Sim, pois as cardinalidades e os sentidos dos relacionamentos entre ''professores'' e ''alunos'' indica, no final, um relacionamento N:N entre essas duas tabelas.', FALSE),
+('01927d4e-a96a-7dc9-be74-e8755f14b1b0', '01927d47-f190-7792-a211-bc3c2aa87c15', 'Não, pois o relacionamento entre ''turmas'' e ''professores'' está errado: a PK ''cod_turma'' deveria ter ido para a tabela ''professores'' como uma FK, mas no diagrama está ao contrário.', FALSE),
+('01927d4e-c24d-721d-a6e3-5f9a44766a0f', '01927d47-f190-7792-a211-bc3c2aa87c15', 'Sim, pois o diagrama mostra claramente que um professor pode ter zero ou mais turmas, e cada aluno pode participar de zero ou mais turmas também.', FALSE),
+('01927d4e-db73-7ab5-a522-e2eb0771ec6b', '01927d47-f190-7792-a211-bc3c2aa87c15', 'Não é possível determinar somente avaliando o diagrama exibido, seriam necessárias mais informações do dicionário de dados.', FALSE);
+
+
+-- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
+INSERT INTO questoes_disciplinas (cod_questao, cod_disciplina) VALUES
+('01927d47-f190-7792-a211-bc3c2aa87c15', '019230bc-08a9-7f9b-b413-411ed5b7e194');
+
+-- 5) RELACIONAR A QUESTÃO COM AS TAGS (recém-criadas ou já existentes):
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d47-f190-7792-a211-bc3c2aa87c15', '01927d3a-151b-77e1-ae95-e9fcf5e311f4');
+
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d47-f190-7792-a211-bc3c2aa87c15', '01927d45-4892-74e6-805e-2466fe3dcb73');
+
+--------------------------------------------------------------------------------
+-- QUESTÃO OBJETIVA:18
+--------------------------------------------------------------------------------
+
+-- Bancos de dados 1: 019230bc-08a9-7f9b-b413-411ed5b7e194
+-- Classificacao: 0192785b-927b-7faa-ac7a-a5f00578c203
+
+-- 1) INSERIR A QUESTÃO (na classificação correta):
+INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) VALUES
+('01927d51-4bfc-74aa-9785-e2806646a493', '0192785b-927b-7faa-ac7a-a5f00578c203', 'O',
+'\question
+Quando Edgar Codd cricou o modelo relacional de dados,
+também criou algumas regras para que a estrutura das tabelas fosse adequada às
+operações de inserção, atualização, remoção e busca de dados. Ao avaliar um
+banco de dados que armazena dados dos eleitores, dos partidos e dos candidatos
+de uma eleição, você encontrou a situação ilustrada na tabela abaixo:
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.35]{imagens/eleicao.png}
+\end{figure}
+Em relação às boas normas de projeto do modelo relacional, assinale a
+alternativa que corretamente identifica um problema no projeto desta tabela:');
+
+-- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
+INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
+('', '01927d51-4bfc-74aa-9785-e2806646a493', 'A tabela está misturando dados de três entidades diferentes, eleitores, partidos e candidatos (o correto seria que cada tabela armazenasse dados de um único assunto ou entidade).', FALSE),
+('', '01927d51-4bfc-74aa-9785-e2806646a493', 'A tabela contém um atributo multivalorado (o correto seria que cada tabela não tivesse atributos multivalorados).', FALSE),
+('', '01927d51-4bfc-74aa-9785-e2806646a493', 'A chave primária para a tabela não está definida e, somente olhando as colunas, não é possível dizer se é a coluna ''numero'' ou a coluna ''titulo''.', FALSE),
+('', '01927d51-4bfc-74aa-9785-e2806646a493', 'Apesar do telefone ser um atributo multivalorado, do jeito que a tabela está criada só é possível armazenar dois números de telefones, criando uma restrição ao armazenamento de telefones de contado de eleitores que tenham mais de dois telefones.', FALSE),
+('', '01927d51-4bfc-74aa-9785-e2806646a493', 'Todas as afirmativas anteriores.', TRUE);
+
+
+-- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
+INSERT INTO questoes_disciplinas (cod_questao, cod_disciplina) VALUES
+('01927d51-4bfc-74aa-9785-e2806646a493', '019230bc-08a9-7f9b-b413-411ed5b7e194');
+
+-- 5) RELACIONAR A QUESTÃO COM AS TAGS (recém-criadas ou já existentes):
+INSERT INTO questoes_tags (cod_questao, cod_tag) VALUES
+('01927d51-4bfc-74aa-9785-e2806646a493', '01927d40-44c9-7690-852e-80609d049cd2');
 
