@@ -13,8 +13,6 @@ from sqlalchemy.sql import text
 PATH = "./banco_de_dados_1.sql"
 # Caminho do diretório onde as imagens estão salvas
 DIRECTORY_IMAGENS = "./imagens/"
-# Caminho do diretório de resultado para salvar as imagens renomeadas
-DIRECTORY_RESULTADO = os.path.join(DIRECTORY_IMAGENS, "resultado")
 
 # Função para capturar imagens dentro de um enunciado
 def capturar_imagens(enunciado, identificador):
@@ -47,22 +45,23 @@ def gerar_novo_nome(identificadores, tags, contador):
     novo_nome = f"{uuid_sufixo}_{tags_concat}_{contador}.png"
     return novo_nome
 
-# Função para salvar a imagem no novo diretório com o nome alterado
-def salvar_imagem(caminho_original, novo_nome):
-    # Criar o diretório "resultado" se ainda não existir
-    caminho_destino = os.path.join(DIRECTORY_RESULTADO, novo_nome)
-    shutil.copy(caminho_original, caminho_destino)
-    print(f"Imagem original: {os.path.basename(caminho_original)} -> Novo nome: {novo_nome}")
-
-# Verificar e excluir a pasta "resultado" se ela já existir
-if os.path.exists(DIRECTORY_RESULTADO):
-    shutil.rmtree(DIRECTORY_RESULTADO)
-# Criar a pasta "resultado" novamente
-os.makedirs(DIRECTORY_RESULTADO)
+# Função para renomear a imagem no local original e atualizar o referenciamento no SQL
+def renomear_imagem(caminho_original, novo_nome, sql_content):
+    diretorio, nome_antigo = os.path.split(caminho_original)
+    caminho_novo = os.path.join(diretorio, novo_nome)
+    
+    # Renomear o arquivo de imagem
+    os.rename(caminho_original, caminho_novo)
+    print(f"Imagem original: {nome_antigo} -> Novo nome: {novo_nome}")
+    
+    # Atualizar o referenciamento no SQL
+    sql_content = sql_content.replace(nome_antigo, novo_nome)
+    
+    return sql_content
 
 # Ler o conteúdo do arquivo SQL
 with open(PATH, 'r') as file:
-    sql = file.read()
+    sql_content = file.read()
 
 # Expressões regulares para capturar questões, alternativas, e tags
 pattern_questao = r"INSERT INTO questoes\s*\(.*?VALUES\s*\('([^']+)'.*?'(.*?)'\);"
@@ -79,19 +78,19 @@ relacoes_tags = {}
 resultados = []
 
 # Capturar todas as tags definidas no arquivo
-matches_tags = re.findall(pattern_tags, sql, re.DOTALL)
+matches_tags = re.findall(pattern_tags, sql_content, re.DOTALL)
 for cod_tag, nome_tag in matches_tags:
     todas_tags[cod_tag] = nome_tag  # Armazenar a tag pelo nome
 
 # Capturar todas as relações de questões com as tags
-matches_relacoes_tags = re.findall(pattern_relacao_tags, sql, re.DOTALL)
+matches_relacoes_tags = re.findall(pattern_relacao_tags, sql_content, re.DOTALL)
 for cod_questao, cod_tag in matches_relacoes_tags:
     if cod_questao not in relacoes_tags:
         relacoes_tags[cod_questao] = []
     relacoes_tags[cod_questao].append(cod_tag)
 
 # Capturar todas as questões e suas imagens
-matches_questoes = re.findall(pattern_questao, sql, re.DOTALL)
+matches_questoes = re.findall(pattern_questao, sql_content, re.DOTALL)
 for cod_questao, enunciado in matches_questoes:
     imagens = capturar_imagens(enunciado, cod_questao)
     tags = capturar_tags(cod_questao, relacoes_tags, todas_tags)
@@ -99,7 +98,7 @@ for cod_questao, enunciado in matches_questoes:
         resultados.append((cod_questao, imagem[1], tags))
 
 # Capturar todas as alternativas e suas imagens
-matches_alternativas_blocos = re.findall(pattern_alternativas, sql, re.DOTALL)
+matches_alternativas_blocos = re.findall(pattern_alternativas, sql_content, re.DOTALL)
 for bloco in matches_alternativas_blocos:
     matches_alternativas = re.findall(pattern_valores_alternativas, bloco)
     for cod_alternativa, cod_questao, enunciado in matches_alternativas:
@@ -131,7 +130,7 @@ for identificador, imagem, tags in resultados:
                 'contador': 1
             }
 
-# Renomear e salvar as imagens com base nos múltiplos UUIDs e tags combinadas
+# Renomear as imagens e atualizar o SQL com base nos múltiplos UUIDs e tags combinadas
 for imagem, dados in mapa_imagens.items():
     identificadores = dados['identificadores']
     tags = dados['tags']
@@ -143,8 +142,12 @@ for imagem, dados in mapa_imagens.items():
     # Obter o caminho da imagem original
     caminho_imagem = verificar_imagem_existe(imagem)
     
-    # Salvar a imagem com o novo nome
-    salvar_imagem(caminho_imagem, novo_nome)
+    # Renomear a imagem no local original e atualizar o SQL
+    sql_content = renomear_imagem(caminho_imagem, novo_nome, sql_content)
+
+# Sobrescrever o arquivo SQL original com as atualizações
+with open(PATH, 'w') as file:
+    file.write(sql_content)
 
 # Exibir mensagem de conclusão
-print("\nProcesso de renomeação e salvamento de imagens concluído.")
+print("\nProcesso de renomeação e atualização do arquivo SQL concluído.")

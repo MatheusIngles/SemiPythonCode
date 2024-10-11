@@ -495,11 +495,11 @@ ou não jogadores.');
 
 -- 2) INSERIR AS ALTERNATIVAS DA QUESTÃO (se múltipla escolha):
 INSERT INTO alternativas (cod_alternativa, cod_questao, enunciado, correta) VALUES
-('01927d36-40e3-7137-8b33-df53a8287c89', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj1.png} \vspace{0.5cm}', FALSE),
-('01927d36-57ce-787f-a81b-fbad30328d0d', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj4.png} \vspace(0.5cm}', TRUE),
-('01927d36-6be2-7322-8355-98d45ac2d556', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj3.png} \vspace{0.5cm}', FALSE),
-('01927d36-8341-7913-855c-f787761163d6', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj5.png} \vspace{0.5cm}', FALSE),
-('01927d36-9b5d-7727-9ecf-8935a673006a', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{cj2.png} \vspace{0.5cm}', FALSE);
+('01927d36-40e3-7137-8b33-df53a8287c89', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{87c89_Cardinalidade de Relacionamentos_1.png} \vspace{0.5cm}', FALSE),
+('01927d36-57ce-787f-a81b-fbad30328d0d', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{28d0d_Cardinalidade de Relacionamentos_1.png} \vspace(0.5cm}', TRUE),
+('01927d36-6be2-7322-8355-98d45ac2d556', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{2d556_Cardinalidade de Relacionamentos_1.png} \vspace{0.5cm}', FALSE),
+('01927d36-8341-7913-855c-f787761163d6', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{163d6_Cardinalidade de Relacionamentos_1.png} \vspace{0.5cm}', FALSE),
+('01927d36-9b5d-7727-9ecf-8935a673006a', '01927d35-51f7-7231-adaa-e9a9921edb16', '\includegraphics[scale=2.0]{3006a_Cardinalidade de Relacionamentos_1.png} \vspace{0.5cm}', FALSE);
 
 
 -- 3) RELACIONAR A QUESTÃO COM A DISCIPLINA:
@@ -531,7 +531,7 @@ INSERT INTO questoes (cod_questao, cod_classificacao, tipo_questao, enunciado) V
   \caption{Banco de dados de peças e fornecedores}
   \label{fig:pecas}
   %\fbox{
-    \includegraphics[scale=2.0]{pecas-fornecedores.png}
+    \includegraphics[scale=2.0]{8761c_3286b_SQL_Banco de Dados Relacional_Cardinalidade de Relacionamentos_Modelagem de Dados_1.png}
   %}\\
   %\footnotesize{Fonte: xxxx.}
 \end{figure}
@@ -584,7 +584,7 @@ Analise o diagrama relacional do banco de dados exibido na figura abaixo:
   \caption{Banco de dados de peças e fornecedores}
   \label{fig:pecas}
   %\fbox{
-    \includegraphics[scale=2.0]{pecas-fornecedores.png}
+    \includegraphics[scale=2.0]{8761c_3286b_SQL_Banco de Dados Relacional_Cardinalidade de Relacionamentos_Modelagem de Dados_1.png}
   %}\\
   %\footnotesize{Fonte: xxxx.}
 \end{figure}
@@ -633,7 +633,7 @@ diferentes professores ao mesmo tempo.
   \caption{Professores, turmas e alunos}
   \label{fig:professores}
   %\fbox{
-    \includegraphics[scale=2.0]{professor-aluno.png}
+    \includegraphics[scale=2.0]{87c15_Cardinalidade de Relacionamentos_Modelagem de Dados_1.png}
   %}\\
   %\footnotesize{Fonte: xxxx.}
 \end{figure}
@@ -677,7 +677,7 @@ banco de dados que armazena dados dos eleitores, dos partidos e dos candidatos
 de uma eleição, você encontrou a situação ilustrada na tabela abaixo:
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.35]{imagens/eleicao.png}
+  \includegraphics[scale=0.35]{imagens/6a493_Banco de Dados Relacional_1.png}
 \end{figure}
 Em relação às boas normas de projeto do modelo relacional, assinale a
 alternativa que corretamente identifica um problema no projeto desta tabela:');
